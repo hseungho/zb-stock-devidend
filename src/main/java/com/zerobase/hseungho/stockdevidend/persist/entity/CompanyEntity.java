@@ -1,6 +1,7 @@
 package com.zerobase.hseungho.stockdevidend.persist.entity;
 
 import com.zerobase.hseungho.stockdevidend.model.Company;
+import com.zerobase.hseungho.stockdevidend.persist.entity.base.BaseNonUpdatableEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -11,11 +12,8 @@ import javax.persistence.*;
 @Getter
 @ToString
 @NoArgsConstructor
-public class CompanyEntity {
+public class CompanyEntity extends BaseNonUpdatableEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(unique = true)
     private String ticker;
     private String name;
