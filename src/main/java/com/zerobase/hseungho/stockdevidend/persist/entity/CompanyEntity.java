@@ -1,7 +1,7 @@
 package com.zerobase.hseungho.stockdevidend.persist.entity;
 
 import com.zerobase.hseungho.stockdevidend.model.Company;
-import com.zerobase.hseungho.stockdevidend.persist.entity.base.BaseNonUpdatableEntity;
+import com.zerobase.hseungho.stockdevidend.persist.entity.base.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @ToString
 @NoArgsConstructor
-public class CompanyEntity extends BaseNonUpdatableEntity {
+public class CompanyEntity extends BaseEntity {
 
     @Column(unique = true)
     private String ticker;

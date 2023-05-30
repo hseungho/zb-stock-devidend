@@ -1,7 +1,7 @@
 package com.zerobase.hseungho.stockdevidend.persist.entity;
 
 import com.zerobase.hseungho.stockdevidend.model.Dividend;
-import com.zerobase.hseungho.stockdevidend.persist.entity.base.BaseNonUpdatableEntity;
+import com.zerobase.hseungho.stockdevidend.persist.entity.base.BaseUpdatableEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 @NoArgsConstructor
-public class DividendEntity extends BaseNonUpdatableEntity {
+public class DividendEntity extends BaseUpdatableEntity {
 
     private Long companyId;
     private LocalDateTime date;
