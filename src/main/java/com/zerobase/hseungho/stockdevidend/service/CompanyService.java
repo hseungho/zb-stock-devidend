@@ -8,6 +8,8 @@ import com.zerobase.hseungho.stockdevidend.persist.entity.CompanyEntity;
 import com.zerobase.hseungho.stockdevidend.persist.entity.DividendEntity;
 import com.zerobase.hseungho.stockdevidend.scraper.Scraper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +28,10 @@ public class CompanyService {
             throw new RuntimeException("already exists ticker -> " + ticker);
         }
         return this.storeCompanyAndDividend(ticker);
+    }
+
+    public Page<CompanyEntity> getAllCompany(Pageable pageable) {
+        return companyRepository.findAll(pageable);
     }
 
     private Company storeCompanyAndDividend(String ticker) {
