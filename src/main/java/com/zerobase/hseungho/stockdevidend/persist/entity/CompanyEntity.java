@@ -9,6 +9,9 @@ import lombok.ToString;
 import javax.persistence.*;
 
 @Entity(name = "COMPANY")
+@Table(indexes = {
+        @Index(name = "idx__name", columnList = "name")
+})
 @Getter
 @ToString
 @NoArgsConstructor

@@ -1,5 +1,6 @@
 package com.zerobase.hseungho.stockdevidend.web;
 
+import com.zerobase.hseungho.stockdevidend.service.FinanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/finance")
 public class FinanceController {
 
+    private final FinanceService financeService;
+
     @GetMapping("/dividend/{companyName}")
     public ResponseEntity<?> searchFinance(@PathVariable String companyName) {
-        return null;
+        return ResponseEntity.ok(financeService.getDividendByCompanyName(companyName));
     }
 
 }
