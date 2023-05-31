@@ -8,6 +8,7 @@ import com.zerobase.hseungho.stockdevidend.persist.entity.CompanyEntity;
 import com.zerobase.hseungho.stockdevidend.persist.entity.DividendEntity;
 import com.zerobase.hseungho.stockdevidend.scraper.Scraper;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.Trie;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CompanyService {
 
+    private final Trie<String, String> trie;
     private final Scraper yahooFinanceScraper;
+
     private final CompanyRepository companyRepository;
     private final DividendRepository dividendRepository;
 
@@ -50,6 +53,19 @@ public class CompanyService {
 
         dividendRepository.saveAll(dividendEntities);
         return company;
+    }
+
+    public void addAutocompleteKeyword(String keyword) {
+        this.trie.put(keyword, null);
+    }
+
+    public List<String> autocomplete(String keyword) {
+        return this.trie.prefixMap(keyword).keySet().stream()
+                .collect(Collectors.toList());
+    }
+
+    public void deleteAutocompleteKeyword(String keyword) {
+        this.trie.remove(keyword);
     }
 
 }
