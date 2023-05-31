@@ -48,7 +48,7 @@ public class CompanyService {
 
         // 스크래핑 결과
         CompanyEntity companyEntity = companyRepository.save(CompanyEntity.of(company));
-        List<DividendEntity> dividendEntities = scrapedResult.getDividendEntities().stream()
+        List<DividendEntity> dividendEntities = scrapedResult.getDividends().stream()
                 .map(dividend -> DividendEntity.of(companyEntity.getId(), dividend))
                 .collect(Collectors.toList());
 

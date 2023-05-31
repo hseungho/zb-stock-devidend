@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 public class ScrapedResult {
 
     private Company company;
-    private List<Dividend> dividendEntities;
+    private List<Dividend> dividends;
 
     public ScrapedResult() {
-        this.dividendEntities = new ArrayList<>();
+        this.dividends = new ArrayList<>();
     }
 
     public static ScrapedResult fromEntity(CompanyEntity companyEntity,
