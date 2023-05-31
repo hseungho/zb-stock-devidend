@@ -1,6 +1,8 @@
 package com.zerobase.hseungho.stockdevidend.persist;
 
 import com.zerobase.hseungho.stockdevidend.persist.entity.CompanyEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +14,7 @@ public interface CompanyRepository extends JpaRepository<CompanyEntity, Long> {
     boolean existsByTicker(String ticker);
 
     Optional<CompanyEntity> findByName(String name);
+
+    Page<CompanyEntity> findAllByNameStartingWithIgnoreCase(String s, Pageable pageable);
 
 }

@@ -10,6 +10,7 @@ import com.zerobase.hseungho.stockdevidend.scraper.Scraper;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.Trie;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +67,13 @@ public class CompanyService {
 
     public void deleteAutocompleteKeyword(String keyword) {
         this.trie.remove(keyword);
+    }
+
+    public List<String> getCompanyNamesByKeyword(String keyword) {
+        Pageable limit = PageRequest.of(0, 10);
+        return this.companyRepository.findAllByNameStartingWithIgnoreCase(keyword, limit).stream()
+                .map(e -> e.getName())
+                .collect(Collectors.toList());
     }
 
 }
