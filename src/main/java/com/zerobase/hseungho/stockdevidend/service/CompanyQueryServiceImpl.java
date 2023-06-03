@@ -7,8 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.Trie;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +31,15 @@ public class CompanyQueryServiceImpl implements CompanyQueryService {
     @Override
     public List<String> autocomplete(String keyword) {
         return this.trie.prefixMap(keyword).keySet().stream()
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> getCompanyNamesByKeyword(String keyword) {
+        Pageable limit = PageRequest.of(0, 10);
+        return this.companyRepository.findAllByNameStartingWithIgnoreCase(keyword, limit).stream()
+                .map(e -> e.getName())
                 .collect(Collectors.toList());
     }
 

@@ -1,18 +1,52 @@
 ### add company
 POST http://localhost:8080/company
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "ticker": "NKE"
 }
 
+> {%
+    client.global.set("company_ticker", response.body.json.ticker);
+    client.global.set("company_name", response.body.json.name);
+%}
+
 ### get companies
 GET http://localhost:8080/company?page=0&size=5
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ### get finance spec. company
 GET http://localhost:8080/finance/dividend/NIKE, Inc.
 Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### delete company
+DELETE http://localhost:8080/company/NKE
+Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ### autocomplete
-GET http://localhost:8080/company/autocomplete?keyword=A
+GET http://localhost:8080/company/autocomplete?keyword=N
+
+### singup
+POST http://localhost:8080/auth/signup
+Content-Type: application/json
+
+{
+  "username": "grace",
+  "password": "grace1234",
+  "roles": ["ROLE_READ", "ROLE_WRITE"]
+}
+
+### signin
+POST http://localhost:8080/auth/signin
+Content-Type: application/json
+
+{
+  "username": "grace",
+  "password": "grace1234"
+}
+
+> {% client.global.set("token", response.body); %}

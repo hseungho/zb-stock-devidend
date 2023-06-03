@@ -12,6 +12,8 @@ public interface CompanyQueryService {
 
     List<String> autocomplete(String keyword);
 
+    List<String> getCompanyNamesByKeyword(String keyword);
+
     List<CompanyEntity> getAllCompany();
 
 }

@@ -11,8 +11,6 @@ import com.zerobase.hseungho.stockdevidend.scraper.Scraper;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.Trie;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +28,6 @@ public class CompanyCommandServiceImpl implements CompanyCommandService {
     private final DividendRepository dividendRepository;
 
     @Override
-    @Transactional
     @CacheEvict(value = CacheKey.COMPANY_LIST, allEntries = true)
     public Company save(String ticker) {
         if (companyRepository.existsByTicker(ticker)) {
@@ -39,7 +36,8 @@ public class CompanyCommandServiceImpl implements CompanyCommandService {
         return this.storeCompanyAndDividend(ticker);
     }
 
-    private Company storeCompanyAndDividend(String ticker) {
+    @Transactional
+    protected Company storeCompanyAndDividend(String ticker) {
         // ticker 를 기준으로 회사를 스크래핑
         Company company = this.yahooFinanceScraper.scrapCompanyByTicker(ticker)
                 .orElseThrow(() -> new RuntimeException("failed to scrap ticker -> " + ticker));
@@ -67,11 +65,18 @@ public class CompanyCommandServiceImpl implements CompanyCommandService {
         this.trie.remove(keyword);
     }
 
-    public List<String> getCompanyNamesByKeyword(String keyword) {
-        Pageable limit = PageRequest.of(0, 10);
-        return this.companyRepository.findAllByNameStartingWithIgnoreCase(keyword, limit).stream()
-                .map(e -> e.getName())
-                .collect(Collectors.toList());
+    @Override
+    @Transactional
+    public String deleteCompany(String ticker) {
+        CompanyEntity company = this.companyRepository.findByTicker(ticker)
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 회사입니다."));
+
+        this.dividendRepository.deleteAllByCompanyId(company.getId());
+        this.companyRepository.delete(company);
+
+        this.deleteAutocompleteKeyword(company.getName());
+
+        return company.getName();
     }
 
 }

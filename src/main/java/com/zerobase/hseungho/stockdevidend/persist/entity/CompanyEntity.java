@@ -10,7 +10,8 @@ import javax.persistence.*;
 
 @Entity(name = "COMPANY")
 @Table(indexes = {
-        @Index(name = "idx__name", columnList = "name")
+        @Index(name = "idx__name", columnList = "name"),
+        @Index(name = "idx__ticker", columnList = "ticker")
 })
 @Getter
 @ToString

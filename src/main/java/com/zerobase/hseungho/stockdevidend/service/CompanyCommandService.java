@@ -9,4 +9,7 @@ public interface CompanyCommandService {
     void addAutocompleteKeyword(String keyword);
 
     void deleteAutocompleteKeyword(String keyword);
+
+    String deleteCompany(String ticker);
+
 }
