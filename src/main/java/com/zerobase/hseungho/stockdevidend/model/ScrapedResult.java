@@ -23,16 +23,10 @@ public class ScrapedResult {
     public static ScrapedResult fromEntity(CompanyEntity companyEntity,
                                            List<DividendEntity> dividendEntities) {
 
-        Company company = Company.builder()
-                .ticker(companyEntity.getTicker())
-                .name(companyEntity.getName())
-                .build();
+        Company company = Company.of(companyEntity.getTicker(), companyEntity.getName());
 
         List<Dividend> dividends = dividendEntities.stream()
-                .map(e -> Dividend.builder()
-                        .dividend(e.getDividend())
-                        .date(e.getDate())
-                        .build())
+                .map(e -> Dividend.of(e.getDate(), e.getDividend()))
                 .collect(Collectors.toList());
 
         return new ScrapedResult(company, dividends);

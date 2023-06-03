@@ -3,7 +3,7 @@ POST http://localhost:8080/company
 Content-Type: application/json
 
 {
-  "ticker": "AAPL"
+  "ticker": "NKE"
 }
 
 ### get companies
@@ -11,7 +11,7 @@ GET http://localhost:8080/company?page=0&size=5
 Content-Type: application/json
 
 ### get finance spec. company
-GET http://localhost:8080/finance/dividend/3M Company
+GET http://localhost:8080/finance/dividend/NIKE, Inc.
 Content-Type: application/json
 
 ### autocomplete

@@ -1,7 +1,8 @@
 package com.zerobase.hseungho.stockdevidend.web;
 
 import com.zerobase.hseungho.stockdevidend.model.Company;
-import com.zerobase.hseungho.stockdevidend.service.CompanyService;
+import com.zerobase.hseungho.stockdevidend.service.CompanyCommandService;
+import com.zerobase.hseungho.stockdevidend.service.CompanyQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +14,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/company")
 public class CompanyController {
 
-    private final CompanyService companyService;
+    private final CompanyQueryService companyQueryService;
+    private final CompanyCommandService companyCommandService;
 
     @GetMapping("/autocomplete")
     public ResponseEntity<?> autocomplete(@RequestParam String keyword) {
-        return ResponseEntity.ok(this.companyService.getCompanyNamesByKeyword(keyword));
+        return ResponseEntity.ok(this.companyQueryService.autocomplete(keyword));
     }
 
     @GetMapping
     public ResponseEntity<?> searchCompany(final Pageable pageable) {
-        return ResponseEntity.ok(this.companyService.getAllCompany(pageable));
+        return ResponseEntity.ok(this.companyQueryService.getAllCompany(pageable));
     }
 
     @PostMapping
@@ -32,8 +34,8 @@ public class CompanyController {
             throw new RuntimeException("ticker is empty");
         }
 
-        Company company = this.companyService.save(ticker);
-        this.companyService.addAutocompleteKeyword(company.getName());
+        Company company = this.companyCommandService.save(ticker);
+        this.companyCommandService.addAutocompleteKeyword(company.getName());
         return ResponseEntity.ok(company);
     }
 

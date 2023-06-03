@@ -1,5 +1,9 @@
 package com.zerobase.hseungho.stockdevidend.persist.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.zerobase.hseungho.stockdevidend.model.Dividend;
 import com.zerobase.hseungho.stockdevidend.persist.entity.base.BaseUpdatableEntity;
 import lombok.Getter;
@@ -25,6 +29,8 @@ import java.time.LocalDateTime;
 public class DividendEntity extends BaseUpdatableEntity {
 
     private Long companyId;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime date;
     private String dividend;
 

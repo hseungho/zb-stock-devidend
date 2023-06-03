@@ -1,10 +1,12 @@
 package com.zerobase.hseungho.stockdevidend.model;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor(staticName = "of")
 public class Company {
 
     private String ticker;
