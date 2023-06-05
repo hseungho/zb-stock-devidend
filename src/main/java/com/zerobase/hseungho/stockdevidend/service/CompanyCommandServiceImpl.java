@@ -1,5 +1,6 @@
 package com.zerobase.hseungho.stockdevidend.service;
 
+import com.zerobase.hseungho.stockdevidend.global.exception.impl.NoCompanyException;
 import com.zerobase.hseungho.stockdevidend.model.Company;
 import com.zerobase.hseungho.stockdevidend.model.ScrapedResult;
 import com.zerobase.hseungho.stockdevidend.model.constants.CacheKey;
@@ -69,7 +70,7 @@ public class CompanyCommandServiceImpl implements CompanyCommandService {
     @Transactional
     public String deleteCompany(String ticker) {
         CompanyEntity company = this.companyRepository.findByTicker(ticker)
-                .orElseThrow(() -> new RuntimeException("존재하지 않는 회사입니다."));
+                .orElseThrow(NoCompanyException::new);
 
         this.dividendRepository.deleteAllByCompanyId(company.getId());
         this.companyRepository.delete(company);
