@@ -1,13 +1,13 @@
 package com.zerobase.hseungho.stockdevidend.service.member;
 
 import com.zerobase.hseungho.stockdevidend.model.Auth;
-import com.zerobase.hseungho.stockdevidend.persist.entity.MemberEntity;
+import com.zerobase.hseungho.stockdevidend.model.Member;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface MemberService extends UserDetailsService {
 
-    MemberEntity register(Auth.SignUp member);
+    Member register(Auth.SignUp member);
 
-    MemberEntity authenticate(Auth.SignIn member);
+    Member authenticate(Auth.SignIn member);
 
 }

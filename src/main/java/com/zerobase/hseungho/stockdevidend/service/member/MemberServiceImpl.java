@@ -3,6 +3,7 @@ package com.zerobase.hseungho.stockdevidend.service.member;
 import com.zerobase.hseungho.stockdevidend.global.exception.impl.AlreadyExistUserException;
 import com.zerobase.hseungho.stockdevidend.global.exception.impl.MisMatchPasswordException;
 import com.zerobase.hseungho.stockdevidend.model.Auth;
+import com.zerobase.hseungho.stockdevidend.model.Member;
 import com.zerobase.hseungho.stockdevidend.persist.entity.MemberEntity;
 import com.zerobase.hseungho.stockdevidend.persist.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,17 +32,17 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberEntity register(Auth.SignUp member) {
+    public Member register(Auth.SignUp member) {
         validateExists(member);
 
         member.setPassword(this.passwordEncoder.encode(member.getPassword()));
 
-        return this.memberRepository.save(member.toEntity());
+        return Member.fromEntity(this.memberRepository.save(member.toEntity()));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public MemberEntity authenticate(Auth.SignIn member) {
+    public Member authenticate(Auth.SignIn member) {
         MemberEntity user = this.memberRepository.findByUsername(member.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException(member.getUsername()));
 
@@ -49,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
             throw new MisMatchPasswordException();
         }
 
-        return user;
+        return Member.fromEntity(user);
     }
 
     private void validateExists(Auth.SignUp member) {
