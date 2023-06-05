@@ -79,7 +79,7 @@ Content-Type: "application/json"
 ```
 
 ### 회원가입
-```json
+```
 Method: POST
 URL: /signup
 Content-Type: "application/json"
@@ -103,7 +103,7 @@ Content-Type: "application/json"
 ```
 
 ### 로그인
-```json
+```
 Method: POST
 URL: /signin
 Content-Type: "application/json"
