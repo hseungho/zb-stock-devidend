@@ -66,7 +66,6 @@ public class TokenProvider {
                     .getBody();
 
         } catch (ExpiredJwtException e) {
-            // TODO
             return e.getClaims();
         }
     }

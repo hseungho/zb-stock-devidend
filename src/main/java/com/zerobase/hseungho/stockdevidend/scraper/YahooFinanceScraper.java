@@ -1,9 +1,11 @@
 package com.zerobase.hseungho.stockdevidend.scraper;
 
+import com.zerobase.hseungho.stockdevidend.global.exception.impl.InternalServerErrorException;
 import com.zerobase.hseungho.stockdevidend.model.Company;
 import com.zerobase.hseungho.stockdevidend.model.Dividend;
 import com.zerobase.hseungho.stockdevidend.model.ScrapedResult;
 import com.zerobase.hseungho.stockdevidend.model.constants.Month;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class YahooFinanceScraper implements Scraper {
 
@@ -52,7 +55,8 @@ public class YahooFinanceScraper implements Scraper {
                 String dividend = lines[3];
 
                 if (month < 0) {
-                    throw new RuntimeException("Unexpected Month enum value -> " + lines[0]);
+                    log.error("month 파싱 오류 -> {}", month);
+                    throw new InternalServerErrorException();
                 }
 
                 dividends.add(Dividend.of(LocalDateTime.of(year, month, day, 0, 0), dividend));
@@ -61,8 +65,8 @@ public class YahooFinanceScraper implements Scraper {
             scrapedResult.setDividends(dividends);
 
         } catch (IOException e) {
-            // TODO
-            throw new RuntimeException(e);
+            log.error("스크래핑 도중 IO Exception 발생");
+            throw new InternalServerErrorException();
         }
 
         return scrapedResult;
@@ -79,6 +83,7 @@ public class YahooFinanceScraper implements Scraper {
 
             return Optional.of(Company.of(ticker, title));
         } catch (IOException e) {
+            log.error("스크래핑 도중 IO Exception 발생");
             e.printStackTrace();
         }
         return Optional.empty();
