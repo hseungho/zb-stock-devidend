@@ -1,4 +1,4 @@
-package com.zerobase.hseungho.stockdevidend.global.exception;
+package com.zerobase.hseungho.stockdevidend.global.exception.api;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

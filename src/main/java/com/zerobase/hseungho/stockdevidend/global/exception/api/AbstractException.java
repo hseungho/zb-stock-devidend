@@ -1,4 +1,4 @@
-package com.zerobase.hseungho.stockdevidend.global.exception;
+package com.zerobase.hseungho.stockdevidend.global.exception.api;
 
 public abstract class AbstractException extends RuntimeException {
 

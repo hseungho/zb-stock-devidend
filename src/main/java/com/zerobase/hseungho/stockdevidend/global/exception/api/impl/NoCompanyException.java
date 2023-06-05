@@ -1,6 +1,6 @@
-package com.zerobase.hseungho.stockdevidend.global.exception.impl;
+package com.zerobase.hseungho.stockdevidend.global.exception.api.impl;
 
-import com.zerobase.hseungho.stockdevidend.global.exception.AbstractException;
+import com.zerobase.hseungho.stockdevidend.global.exception.api.AbstractException;
 import org.springframework.http.HttpStatus;
 
 public class NoCompanyException extends AbstractException {

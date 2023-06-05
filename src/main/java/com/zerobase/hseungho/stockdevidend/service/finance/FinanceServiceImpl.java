@@ -1,6 +1,6 @@
 package com.zerobase.hseungho.stockdevidend.service.finance;
 
-import com.zerobase.hseungho.stockdevidend.global.exception.impl.NoCompanyException;
+import com.zerobase.hseungho.stockdevidend.global.exception.api.impl.NoCompanyException;
 import com.zerobase.hseungho.stockdevidend.model.ScrapedResult;
 import com.zerobase.hseungho.stockdevidend.model.constants.CacheKey;
 import com.zerobase.hseungho.stockdevidend.persist.CompanyRepository;

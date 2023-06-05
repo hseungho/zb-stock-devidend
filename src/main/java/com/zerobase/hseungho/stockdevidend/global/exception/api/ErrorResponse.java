@@ -1,4 +1,4 @@
-package com.zerobase.hseungho.stockdevidend.global.exception;
+package com.zerobase.hseungho.stockdevidend.global.exception.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

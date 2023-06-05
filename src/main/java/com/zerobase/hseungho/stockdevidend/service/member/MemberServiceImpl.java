@@ -1,11 +1,12 @@
 package com.zerobase.hseungho.stockdevidend.service.member;
 
-import com.zerobase.hseungho.stockdevidend.global.exception.impl.AlreadyExistUserException;
-import com.zerobase.hseungho.stockdevidend.global.exception.impl.MisMatchPasswordException;
+import com.zerobase.hseungho.stockdevidend.global.exception.api.impl.AlreadyExistUserException;
+import com.zerobase.hseungho.stockdevidend.global.exception.api.impl.MisMatchPasswordException;
+import com.zerobase.hseungho.stockdevidend.global.exception.api.impl.NotFoundMemberException;
 import com.zerobase.hseungho.stockdevidend.model.Auth;
 import com.zerobase.hseungho.stockdevidend.model.Member;
-import com.zerobase.hseungho.stockdevidend.persist.entity.MemberEntity;
 import com.zerobase.hseungho.stockdevidend.persist.MemberRepository;
+import com.zerobase.hseungho.stockdevidend.persist.entity.MemberEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,7 +45,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional(readOnly = true)
     public Member authenticate(Auth.SignIn member) {
         MemberEntity user = this.memberRepository.findByUsername(member.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException(member.getUsername()));
+                .orElseThrow(NotFoundMemberException::new);
 
         if (!this.passwordEncoder.matches(member.getPassword(), user.getPassword())) {
             throw new MisMatchPasswordException();

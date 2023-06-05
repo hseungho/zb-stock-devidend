@@ -1,7 +1,7 @@
 package com.zerobase.hseungho.stockdevidend.service.company;
 
-import com.zerobase.hseungho.stockdevidend.global.exception.impl.InternalServerErrorException;
-import com.zerobase.hseungho.stockdevidend.global.exception.impl.NoCompanyException;
+import com.zerobase.hseungho.stockdevidend.global.exception.api.impl.InternalServerErrorException;
+import com.zerobase.hseungho.stockdevidend.global.exception.api.impl.NoCompanyException;
 import com.zerobase.hseungho.stockdevidend.model.Company;
 import com.zerobase.hseungho.stockdevidend.model.ScrapedResult;
 import com.zerobase.hseungho.stockdevidend.model.constants.CacheKey;

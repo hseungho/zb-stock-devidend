@@ -27,13 +27,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .httpBasic().disable()
+                .cors().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                     .authorizeRequests()
                         .antMatchers("/**/signup", "/**/signin").permitAll()
                 .and()
-                    .addFilterBefore(this.authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                    .addFilterAfter(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

@@ -1,10 +1,9 @@
 package com.zerobase.hseungho.stockdevidend.security;
 
+import com.zerobase.hseungho.stockdevidend.global.exception.internal.impl.TokenExpiredException;
+import com.zerobase.hseungho.stockdevidend.global.exception.internal.impl.TokenInvalidException;
 import com.zerobase.hseungho.stockdevidend.service.member.MemberService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -66,7 +65,9 @@ public class TokenProvider {
                     .getBody();
 
         } catch (ExpiredJwtException e) {
-            return e.getClaims();
+            throw new TokenExpiredException();
+        } catch (JwtException e){
+            throw new TokenInvalidException();
         }
     }
 

@@ -1,6 +1,6 @@
 package com.zerobase.hseungho.stockdevidend.scraper;
 
-import com.zerobase.hseungho.stockdevidend.global.exception.impl.InternalServerErrorException;
+import com.zerobase.hseungho.stockdevidend.global.exception.api.impl.InternalServerErrorException;
 import com.zerobase.hseungho.stockdevidend.model.Company;
 import com.zerobase.hseungho.stockdevidend.model.Dividend;
 import com.zerobase.hseungho.stockdevidend.model.ScrapedResult;
