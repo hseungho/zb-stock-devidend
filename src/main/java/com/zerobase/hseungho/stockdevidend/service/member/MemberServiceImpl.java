@@ -1,10 +1,10 @@
-package com.zerobase.hseungho.stockdevidend.service;
+package com.zerobase.hseungho.stockdevidend.service.member;
 
 import com.zerobase.hseungho.stockdevidend.global.exception.impl.AlreadyExistUserException;
 import com.zerobase.hseungho.stockdevidend.global.exception.impl.MisMatchPasswordException;
 import com.zerobase.hseungho.stockdevidend.model.Auth;
 import com.zerobase.hseungho.stockdevidend.persist.entity.MemberEntity;
-import com.zerobase.hseungho.stockdevidend.persist.entity.MemberRepository;
+import com.zerobase.hseungho.stockdevidend.persist.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,4 +1,4 @@
-package com.zerobase.hseungho.stockdevidend.service;
+package com.zerobase.hseungho.stockdevidend.service.company;
 
 import com.zerobase.hseungho.stockdevidend.model.constants.CacheKey;
 import com.zerobase.hseungho.stockdevidend.persist.CompanyRepository;

@@ -1,5 +1,6 @@
 package com.zerobase.hseungho.stockdevidend.persist.entity;
 
+import com.zerobase.hseungho.stockdevidend.persist.entity.base.BaseUpdatableEntity;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "MEMBER")
-public class MemberEntity implements UserDetails {
+public class MemberEntity extends BaseUpdatableEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

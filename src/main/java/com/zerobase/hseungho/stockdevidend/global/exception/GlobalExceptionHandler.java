@@ -11,6 +11,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AbstractException.class)
     public ResponseEntity<?> handleCustomException(AbstractException e) {
+        log.error("------ Occurred Custom Exception ------");
+        log.error("exception class name -> {}", e.getClass().getSimpleName());
+        log.error("exception simple message -> {}", e.getMessage());
+        log.error("exception print stack trace -> ", e);
+        log.error("---------------------------------------");
+
         return ResponseEntity
                 .status(e.getStatusCode())
                 .body(ErrorResponse.builder()

@@ -1,4 +1,4 @@
-package com.zerobase.hseungho.stockdevidend.service;
+package com.zerobase.hseungho.stockdevidend.service.company;
 
 import com.zerobase.hseungho.stockdevidend.persist.entity.CompanyEntity;
 import org.springframework.data.domain.Page;

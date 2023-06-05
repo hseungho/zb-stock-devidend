@@ -1,4 +1,4 @@
-package com.zerobase.hseungho.stockdevidend.service;
+package com.zerobase.hseungho.stockdevidend.service.member;
 
 import com.zerobase.hseungho.stockdevidend.model.Auth;
 import com.zerobase.hseungho.stockdevidend.persist.entity.MemberEntity;

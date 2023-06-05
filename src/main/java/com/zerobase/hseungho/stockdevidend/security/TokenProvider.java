@@ -1,6 +1,6 @@
 package com.zerobase.hseungho.stockdevidend.security;
 
-import com.zerobase.hseungho.stockdevidend.service.MemberService;
+import com.zerobase.hseungho.stockdevidend.service.member.MemberService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

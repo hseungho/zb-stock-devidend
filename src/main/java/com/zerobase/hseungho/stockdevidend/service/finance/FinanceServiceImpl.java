@@ -1,4 +1,4 @@
-package com.zerobase.hseungho.stockdevidend.service;
+package com.zerobase.hseungho.stockdevidend.service.finance;
 
 import com.zerobase.hseungho.stockdevidend.global.exception.impl.NoCompanyException;
 import com.zerobase.hseungho.stockdevidend.model.ScrapedResult;
@@ -18,11 +18,12 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class FinanceService {
+public class FinanceServiceImpl implements FinanceService {
 
     private final CompanyRepository companyRepository;
     private final DividendRepository dividendRepository;
 
+    @Override
     @Transactional(readOnly = true)
     @Cacheable(key = "#companyName", value = CacheKey.FINANCE)
     public ScrapedResult getDividendByCompanyName(String companyName) {

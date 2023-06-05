@@ -2,8 +2,8 @@ package com.zerobase.hseungho.stockdevidend.web;
 
 import com.zerobase.hseungho.stockdevidend.model.Company;
 import com.zerobase.hseungho.stockdevidend.model.constants.CacheKey;
-import com.zerobase.hseungho.stockdevidend.service.CompanyCommandService;
-import com.zerobase.hseungho.stockdevidend.service.CompanyQueryService;
+import com.zerobase.hseungho.stockdevidend.service.company.CompanyCommandService;
+import com.zerobase.hseungho.stockdevidend.service.company.CompanyQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Pageable;

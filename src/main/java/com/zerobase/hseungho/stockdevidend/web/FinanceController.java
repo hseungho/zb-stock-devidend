@@ -1,6 +1,6 @@
 package com.zerobase.hseungho.stockdevidend.web;
 
-import com.zerobase.hseungho.stockdevidend.service.FinanceService;
+import com.zerobase.hseungho.stockdevidend.service.finance.FinanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -2,7 +2,7 @@ package com.zerobase.hseungho.stockdevidend.web;
 
 import com.zerobase.hseungho.stockdevidend.model.Auth;
 import com.zerobase.hseungho.stockdevidend.security.TokenProvider;
-import com.zerobase.hseungho.stockdevidend.service.MemberService;
+import com.zerobase.hseungho.stockdevidend.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

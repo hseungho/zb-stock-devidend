@@ -1,4 +1,4 @@
-package com.zerobase.hseungho.stockdevidend.service;
+package com.zerobase.hseungho.stockdevidend.service.company;
 
 import com.zerobase.hseungho.stockdevidend.global.exception.impl.InternalServerErrorException;
 import com.zerobase.hseungho.stockdevidend.global.exception.impl.NoCompanyException;
@@ -69,11 +69,13 @@ public class CompanyCommandServiceImpl implements CompanyCommandService {
     @Override
     public void addAutocompleteKeyword(String keyword) {
         this.trie.put(keyword, null);
+        log.debug("trie putted {} for autocomplete", keyword);
     }
 
     @Override
     public void deleteAutocompleteKeyword(String keyword) {
         this.trie.remove(keyword);
+        log.debug("trie removed {}", keyword);
     }
 
     @Override

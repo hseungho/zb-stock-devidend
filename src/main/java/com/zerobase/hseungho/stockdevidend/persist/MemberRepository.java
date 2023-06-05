@@ -1,5 +1,6 @@
-package com.zerobase.hseungho.stockdevidend.persist.entity;
+package com.zerobase.hseungho.stockdevidend.persist;
 
+import com.zerobase.hseungho.stockdevidend.persist.entity.MemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

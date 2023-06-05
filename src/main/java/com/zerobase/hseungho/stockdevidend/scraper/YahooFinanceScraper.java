@@ -34,6 +34,8 @@ public class YahooFinanceScraper implements Scraper {
         try {
             long now = System.currentTimeMillis() / 1000;
             String url = String.format(STATISTICS_URL, company.getTicker(), START_TIME, now);
+            log.debug("request scraping dividends of {} company -> {}", company.getTicker(), url);
+
             Connection connection = Jsoup.connect(url);
             Document document = connection.get();
 
@@ -55,7 +57,7 @@ public class YahooFinanceScraper implements Scraper {
                 String dividend = lines[3];
 
                 if (month < 0) {
-                    log.error("month 파싱 오류 -> {}", month);
+                    log.error("occurred parsing month during scraping -> {}", month);
                     throw new InternalServerErrorException();
                 }
 
@@ -65,7 +67,7 @@ public class YahooFinanceScraper implements Scraper {
             scrapedResult.setDividends(dividends);
 
         } catch (IOException e) {
-            log.error("스크래핑 도중 IO Exception 발생");
+            log.error("occurred IOException during scraping -> ", e);
             throw new InternalServerErrorException();
         }
 
@@ -75,6 +77,7 @@ public class YahooFinanceScraper implements Scraper {
     @Override
     public Optional<Company> scrapCompanyByTicker(String ticker) {
         String url = String.format(SUMMARY_URL, ticker, ticker);
+        log.debug("request scraping {} company -> {}", ticker, url);
 
         try {
             Document document = Jsoup.connect(url).get();
@@ -83,8 +86,7 @@ public class YahooFinanceScraper implements Scraper {
 
             return Optional.of(Company.of(ticker, title));
         } catch (IOException e) {
-            log.error("스크래핑 도중 IO Exception 발생");
-            e.printStackTrace();
+            log.error("occurred IOException during scraping -> ", e);
         }
         return Optional.empty();
     }
